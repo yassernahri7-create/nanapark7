@@ -489,8 +489,19 @@ function t(key) {
     return (translations[currentLang] && translations[currentLang][key]) || key;
 }
 
-function setLanguage(lang) {
+function setLanguage(lang, avoidCallback = false) {
     if (!translations[lang]) lang = 'en';
+
+    // Guard: Don't do anything if language is already the same
+    if (lang === currentLang && localStorage.getItem('nana_lang') === lang) {
+        // Still update buttons just in case DOM got reloaded
+        const activeBtn = document.querySelector('.lang-btn.active');
+        if (activeBtn) activeBtn.classList.remove('active');
+        const newActive = document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+        if (newActive) newActive.classList.add('active');
+        return;
+    }
+
     currentLang = lang;
     localStorage.setItem('nana_lang', lang);
 
@@ -500,7 +511,10 @@ function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
+            // Optimization: Only update if text content is different
+            if (el.innerHTML !== translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
         } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             const plcKey = el.getAttribute('data-i18n-plc');
             if (plcKey && translations[lang][plcKey]) {
@@ -523,22 +537,14 @@ function setLanguage(lang) {
     if (newActive) newActive.classList.add('active');
 
     // Notify application
-    if (window.onLanguageChange) {
+    if (!avoidCallback && window.onLanguageChange) {
         window.onLanguageChange(lang);
     }
 }
 
 function initLanguage() {
-    let savedLang = localStorage.getItem('nana_lang');
-    if (!savedLang) {
-        const browserLang = navigator.language.substring(0, 2).toLowerCase();
-        if (['ar', 'fr', 'en', 'es'].includes(browserLang)) {
-            savedLang = browserLang;
-        } else {
-            savedLang = 'en'; // default
-        }
-    }
-    setLanguage(savedLang);
+    const savedLang = localStorage.getItem('nana_lang') || 'en';
+    setLanguage(savedLang, true); // Don't trigger callback on init
 }
 
 document.addEventListener('DOMContentLoaded', () => {
