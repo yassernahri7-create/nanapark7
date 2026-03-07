@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana Club – Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #a07820;
+            --bg: #05050a;
+            --card: #0d0d18;
+            --card2: #0a0a12;
+            --border: rgba(212, 175, 55, 0.15);
+            --text: #e0e0e8;
+            --muted: #666;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── LOGIN OVERLAY ── */
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: var(--card);
+            padding: 45px 40px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            margin: 16px;
+        }
+
+        .login-box .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-box .logo-diamond {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            border: 2px solid var(--gold);
+            transform: rotate(45deg);
+            margin-bottom: 14px;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .login-box .logo-diamond span {
+            transform: rotate(-45deg);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .login-box h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .login-box p {
+            color: var(--muted);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .lang-switcher-admin {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .lang-btn {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* ── SAVE-BTN (login form submit) ── */
+        .save-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.2s;
+            min-height: 48px;
+        }
+
+        .save-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .admin-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ── TABS ── */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 28px;
+            background: var(--card2);
+            padding: 6px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px 14px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            border-radius: 7px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .tab:hover {
+            color: var(--gold);
+        }
+
+        .tab.active {
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        /* ── PANELS ── */
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        /* ── FORM ── */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.04);
+        }
+
+        .form-group input[type="color"] {
+            padding: 4px;
+            height: 42px;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1a1a2a;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .btn:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: #000;
+        }
+
+        .btn-danger {
+            background: #c0392b;
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 0.7rem;
+        }
+
+        .btn-edit {
+            background: #2980b9;
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 0.7rem;
+        }
+
+        .btn-green {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .btn-orange {
+            background: #e67e22;
+            color: #fff;
+        }
+
+        .btn-logout {
+            background: #c0392b;
+            color: #fff;
+            padding: 8px 18px;
+            font-size: 0.72rem;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 14px;
+        }
+
+        /* ── CARD BOX ── */
+        .card-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* ── ITEM LIST ── */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .item-row {
+            background: var(--card2);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            transition: 0.2s;
+        }
+
+        .item-row:hover {
+            border-color: var(--border);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 4px;
+            font-size: 0.92rem;
+        }
+
+        .item-info small {
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .img-thumb {
+            width: 56px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .img-thumb-sq {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .no-img {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--muted);
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        /* ── SECURITY BOX ── */
+        .security-box {
+            background: rgba(231, 76, 60, 0.04);
+            border: 1px solid rgba(231, 76, 60, 0.18);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 28px;
+        }
+
+        .security-box h3 {
+            color: #e67e22;
+        }
+
+        .security-box p {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 20px;
+        }
+
+        /* ── SAVE ALL BUTTON ── */
+        #save-all {
+            display: block;
+            width: 100%;
+            margin-top: 32px;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #save-all:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.35);
+        }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 13px 24px;
+            background: var(--gold);
+            color: #000;
+            border-radius: 8px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 9999;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 650px) {
+
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+
+            /* Login box tightened for phones */
+            .login-box {
+                padding: 28px 20px;
+                margin: 12px;
+            }
+
+            /* Header stacks on phone */
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .admin-header>div {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            /* Admin title smaller on phone */
+            .admin-header h1 {
+                font-size: 0.95rem;
+                letter-spacing: 2px;
+            }
+
+            /* Container smaller side padding */
+            .container {
+                padding: 16px 12px 80px;
+            }
+
+            /* Tabs: 2×2 grid on phone */
+            .tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            .tab {
+                flex: none;
+                padding: 12px 8px;
+                font-size: 0.7rem;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                min-height: 48px;
+            }
+
+            /* Item rows: stack vertically */
+            .item-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                padding: 14px;
+            }
+
+            .item-info strong {
+                font-size: 1rem;
+            }
+
+            /* Thumbnails larger on mobile */
+            .img-thumb,
+            .img-thumb-sq {
+                width: 100%;
+                height: 120px;
+                border-radius: 8px;
+            }
+
+            .no-img {
+                width: 100%;
+                height: 60px;
+            }
+
+            /* Action buttons side-by-side full-width */
+            .item-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .item-actions .btn {
+                justify-content: center;
+                padding: 12px;
+                font-size: 0.75rem;
+            }
+
+            /* Card box less padding on phone */
+            .card-box {
+                padding: 16px;
+            }
+
+            /* Security box less padding */
+            .security-box {
+                padding: 16px;
+            }
+
+            /* Toast goes to bottom center on mobile */
+            .toast {
+                top: auto;
+                bottom: 20px;
+                right: 50%;
+                transform: translateX(50%);
+                width: calc(100% - 32px);
+                text-align: center;
+            }
+
+            /* Save all button bigger for touch */
+            #save-all {
+                padding: 18px;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                margin-top: 20px;
+            }
+
+            /* Form inputs bigger touch targets */
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 13px 14px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ LOGIN OVERLAY ═══════════════ -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="logo">
+                <div class="logo-diamond"><span>N</span></div>
+                <h2 data-i18n="admin_title">Nana Club – Admin Panel</h2>
+                <p data-i18n="admin_login_sub">Management Suite</p>
+            </div>
+            <form onsubmit="handleLogin(event)" style="margin-top: 25px;">
+                <div class="form-group">
+                    <label data-i18n="admin_user_lbl">Username</label>
+                    <input type="text" id="login-user" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="admin_pass_lbl">Password</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="save-btn" style="width: 100%; margin-top: 10px;"
+                    data-i18n="admin_login_btn">Enter Dashboard</button>
+            </form>
+
+            <div class="lang-switcher-admin">
+                <span class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</span>
+                <span class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</span>
+                <span class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</span>
+                <span class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">AR</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ MAIN PANEL ═══════════════ -->
+    <div class="container">
+        <div class="admin-header">
+            <h1 data-i18n="admin_title"><i class="fas fa-sliders-h"></i> Nana Club – Admin Panel</h1>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="lang-switcher-admin" style="margin-top: 0;">
+                    <span class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</span>
+                    <span class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</span>
+                    <span class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</span>
+                    <span class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">AR</span>
+                </div>
+                <button onclick="logout()" class="btn btn-logout"
+                    style="background:rgba(255,255,255,0.05); border:1px solid var(--border); color:#888;">
+                    <i class="fas fa-sign-out-alt"></i> <span data-i18n="admin_logout">Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(event,'events')">
+                <i class="fas fa-calendar-day"></i> <span data-i18n="admin_tab_events">Events</span>
+            </button>
+            <button class="tab" onclick="switchTab(event,'carta')">
+                <i class="fas fa-wine-glass"></i> <span data-i18n="admin_tab_carta">Carta</span>
+            </button>
+            <button class="tab" onclick="switchTab(event,'photos')">
+                <i class="fas fa-images"></i> <span data-i18n="admin_tab_gallery">Gallery</span>
+            </button>
+            <button class="tab" onclick="switchTab(event,'settings')">
+                <i class="fas fa-gear"></i> <span data-i18n="admin_tab_settings">Settings</span>
+            </button>
+        </div>
+
+        <!-- ══ EVENTS PANEL ══ -->
+        <div id="panel-events" class="panel active">
+            <h2><i class="fas fa-calendar-day"></i> Manage Events</h2>
+            <div id="events-list" class="item-list">
+                <p style="color:var(--muted); font-size:0.85rem;">Loading...</p>
+            </div>
+            <div class="card-box">
+                <h3 id="ev-form-title">Add New Event</h3>
+                <form id="form-event" onsubmit="handleEventSubmit(event)">
+                    <div class="form-group">
+                        <label>Poster / Event Image (Optional)</label>
+                        <input type="file" id="ev-img" accept="image/*">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Day (e.g. FRIDAY)</label>
+                            <input type="text" id="ev-day" required placeholder="FRIDAY">
+                        </div>
+                        <div class="form-group">
+                            <label>Date (e.g. VENDREDI 7 MARS)</label>
+                            <input type="text" id="ev-date" required placeholder="VENDREDI 7 MARS">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Details / Description (line breaks allowed)</label>
+                        <textarea id="ev-details" rows="3" required
+                            placeholder="KHALEEJI NIGHT · OPEN BAR MIDNIGHT · RESERVE YOUR TABLE NOW"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Music By / DJ Name</label>
+                            <input type="text" id="ev-music" required placeholder="DJ MARTINEZ">
+                        </div>
+                        <div class="form-group">
+                            <label>Theme Color</label>
+                            <input type="color" id="ev-color" value="#d4af37">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gold" id="ev-submit-btn">
+                        <i class="fas fa-plus"></i> <span>Add Event</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ══ CARTA PANEL ══ -->
+        <div id="panel-carta" class="panel">
+            <h2><i class="fas fa-wine-glass-alt"></i> Manage Carta (Drinks & Menu)</h2>
+            <div id="carta-list" class="item-list">
+                <p style="color:var(--muted); font-size:0.85rem;">Loading...</p>
+            </div>
+            <div class="card-box">
+                <h3 id="carta-form-title">Add Drink / Bottle</h3>
+                <form id="form-carta" onsubmit="handleCartaSubmit(event)">
+                    <div class="form-group">
+                        <label>Image (Optional)</label>
+                        <input type="file" id="crt-img" accept="image/*">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input type="text" id="crt-name" required placeholder="Margarita">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="crt-cat">
+                                <option value="Bières">Bières</option>
+                                <option value="Apèritif">Apèritif</option>
+                                <option value="Liqueur">Liqueur</option>
+                                <option value="Single Malt">Single Malt</option>
+                                <option value="Cognac">Cognac</option>
+                                <option value="Tequilla">Tequilla</option>
+                                <option value="Shooter">Shooter</option>
+                                <option value="Softs">Softs</option>
+                                <option value="Champagnes">Champagnes</option>
+                                <option value="Rhum">Rhum</option>
+                                <option value="Vodka">Vodka</option>
+                                <option value="Gin">Gin</option>
+                                <option value="Whisky">Whisky</option>
+                                <option value="Cocktails Alcoolisès">Cocktails Alcoolisès</option>
+                                <option value="Cocktails sans Alcoolisès">Cocktails sans Alcoolisès</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Glass / Drink Price (MAD)</label>
+                            <input type="text" id="crt-price" placeholder="120 MAD">
+                        </div>
+                        <div class="form-group">
+                            <label>Full Bottle / VIP Table Price (MAD)</label>
+                            <input type="text" id="crt-table" placeholder="2000 MAD">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gold" id="carta-submit-btn">
+                        <i class="fas fa-plus"></i> <span>Add to Carta</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ══ GALLERY PANEL ══ -->
+        <div id="panel-photos" class="panel">
+            <h2><i class="fas fa-images"></i> Manage Gallery</h2>
+            <div id="photos-list" class="item-list">
+                <p style="color:var(--muted); font-size:0.85rem;">Loading...</p>
+            </div>
+            <div class="card-box">
+                <h3>Upload Photo / Video</h3>
+                <form id="form-photo" onsubmit="handlePhotoSubmit(event)">
+                    <div class="form-group">
+                        <label>File (Image or Video MP4)</label>
+                        <input type="file" id="p-file" accept="image/*,video/mp4">
+                    </div>
+                    <div class="form-group">
+                        <label>Caption / Description (tag "Menu" or "Board" to show in Digital Boards section)</label>
+                        <input type="text" id="p-alt" placeholder="e.g. Menu Board, VIP Night, Khaleeji Party...">
+                    </div>
+                    <button type="submit" class="btn btn-gold">
+                        <i class="fas fa-upload"></i> Upload Media
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ══ SETTINGS PANEL ══ -->
+        <div id="panel-settings" class="panel">
+            <h2><i class="fas fa-cog"></i> Global Settings</h2>
+            <div class="card-box">
+                <h3>Social Media & Contact Links</h3>
+                <form id="form-settings" onsubmit="handleSettingsSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>TikTok URL</label>
+                            <input type="url" id="set-tiktok" placeholder="https://tiktok.com/@nanaclub">
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram URL</label>
+                            <input type="url" id="set-insta" placeholder="https://instagram.com/nanaclub">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Facebook URL</label>
+                            <input type="url" id="set-fb" placeholder="https://facebook.com/nanaclub">
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number (API format, e.g. +212644347568)</label>
+                            <input type="text" id="set-wa" placeholder="+212644347568">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Display Phone Number</label>
+                        <input type="text" id="set-phone" placeholder="+212 644 347 568">
+                    </div>
+                    <button type="submit" class="btn btn-green btn-full">
+                        <i class="fas fa-save"></i> Save Social Settings
+                    </button>
+                </form>
+
+                <div class="security-box">
+                    <h3><i class="fas fa-shield-alt"></i> &nbsp;Security & Access</h3>
+                    <p>Update your admin login credentials. Make sure to remember them — they are required to access
+                        this panel.</p>
+                    <form id="form-auth" onsubmit="handleAuthSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Admin Username</label>
+                                <input type="text" id="set-user" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Admin Password</label>
+                                <input type="password" id="set-pass" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-orange btn-full">
+                            <i class="fas fa-key"></i> Update Admin Credentials
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button id="save-all" onclick="saveData()">
+            <i class="fas fa-save"></i> &nbsp;SAVE ALL CHANGES PERMANENTLY
+        </button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // ─────────────────────────────────────────────────────────
+        window.onerror = function (msg, url, line, col, err) {
+            console.error('Error:', msg, url, line);
+            return false;
+        };
+
+        let siteData = { events: [], carta: { drinks: [] }, photos: [], settings: {}, auth: {} };
+        let editingEventIndex = -1;
+        let editingCartaIndex = -1;
+
+        // ── AUTH ──────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('nana_admin') === 'true') {
+                document.getElementById('login-overlay').style.display = 'none';
+                loadData();
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('nana_admin');
+            window.location.reload();
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-user').value;
+            const password = document.getElementById('login-pass').value;
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const result = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('nana_admin', 'true');
+                    document.getElementById('login-overlay').style.display = 'none';
+                    loadData();
+                } else {
+                    alert('Invalid credentials. Default: admin / nana2024');
+                }
+            } catch (err) {
+                alert('Login error: ' + err.message);
+            }
+        }
+
+        // ── TABS ──────────────────────────────────────────────────
+        function switchTab(e, id) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            const p = document.getElementById('panel-' + id);
+            if (p) p.classList.add('active');
+        }
+
+        // ── LOAD DATA ─────────────────────────────────────────────
+        async function loadData() {
+            try {
+                const res = await fetch('/api/data');
+                if (!res.ok) throw new Error('Server returned ' + res.status);
+                const data = await res.json();
+                siteData = {
+                    events: data.events || [],
+                    carta: { drinks: (data.carta && data.carta.drinks) ? data.carta.drinks : [] },
+                    photos: data.photos || [],
+                    settings: data.settings || {},
+                    auth: data.auth || {}
+                };
+                renderAll();
+            } catch (err) {
+                alert('Failed to load data: ' + err.message);
+            }
+        }
+
+        function renderAll() {
+            renderEvents();
+            renderCarta();
+            renderPhotos();
+            if (siteData.settings) {
+                document.getElementById('set-tiktok').value = siteData.settings.tiktok || '';
+                document.getElementById('set-insta').value = siteData.settings.instagram || '';
+                document.getElementById('set-fb').value = siteData.settings.facebook || '';
+                document.getElementById('set-wa').value = siteData.settings.whatsapp || '';
+                document.getElementById('set-phone').value = siteData.settings.phone || '';
+            }
+            if (siteData.auth) {
+                document.getElementById('set-user').value = siteData.auth.username || 'admin';
+            }
+        }
+
+        // ── UPLOAD FILE ───────────────────────────────────────────
+        async function uploadFile(fileInput) {
+            if (!fileInput || !fileInput.files[0]) return '';
+            const fd = new FormData();
+            fd.append('image', fileInput.files[0]);
+            const res = await fetch('/api/upload', { method: 'POST', body: fd });
+            const data = await res.json();
+            return data.url || '';
+        }
+
+        // ── EVENTS ────────────────────────────────────────────────
+        function renderEvents() {
+            const box = document.getElementById('events-list');
+            if (!box) return;
+            if (!siteData.events.length) {
+                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No events yet. Add one below.</p>';
+                return;
+            }
+            box.innerHTML = siteData.events.map((ev, i) => `
+        <div class="item-row">
+            ${ev.image
+                    ? `<img src="${ev.image}" class="img-thumb" alt="${ev.day}">`
+                    : `<div class="no-img"><i class="fas fa-calendar"></i></div>`
+                }
+            <div class="item-info">
+                <strong style="color:${ev.themeColor || '#d4af37'}">${ev.day || 'N/A'}</strong>
+                <small>${ev.date || 'No date'} · 🎵 ${ev.musicBy || 'N/A'}</small>
+                <small style="display:block; margin-top:4px; white-space:pre-line; opacity:0.7;">${ev.details || ''}</small>
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-edit" onclick="startEditEvent(${i})"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger" onclick="deleteEvent(${i})"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>`).join('');
+        }
+
+        async function handleEventSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('ev-submit-btn');
+            const origHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            try {
+                const fileInput = document.getElementById('ev-img');
+                let imageUrl = editingEventIndex > -1 ? (siteData.events[editingEventIndex].image || '') : '';
+                if (fileInput && fileInput.files[0]) imageUrl = await uploadFile(fileInput);
+
+                const ev = {
+                    id: editingEventIndex > -1 ? siteData.events[editingEventIndex].id : 'ev-' + Date.now(),
+                    image: imageUrl,
+                    day: (document.getElementById('ev-day').value || '').toUpperCase(),
+                    date: (document.getElementById('ev-date').value || '').toUpperCase(),
+                    details: document.getElementById('ev-details').value || '',
+                    musicBy: (document.getElementById('ev-music').value || '').toUpperCase(),
+                    themeColor: document.getElementById('ev-color').value || '#d4af37'
+                };
+
+                if (editingEventIndex > -1) {
+                    siteData.events[editingEventIndex] = ev;
+                    editingEventIndex = -1;
+                } else {
+                    siteData.events.push(ev);
+                }
+
+                e.target.reset();
+                document.getElementById('ev-color').value = '#d4af37';
+                document.getElementById('ev-form-title').textContent = 'Add New Event';
+                btn.innerHTML = '<i class="fas fa-plus"></i> <span>Add Event</span>';
+                renderEvents();
+                await saveData();
+            } catch (err) {
+                alert('Error: ' + err.message);
+                btn.innerHTML = origHTML;
+            }
+        }
+
+        function startEditEvent(i) {
+            editingEventIndex = i;
+            const ev = siteData.events[i];
+            document.getElementById('ev-day').value = ev.day || '';
+            document.getElementById('ev-date').value = ev.date || '';
+            document.getElementById('ev-details').value = ev.details || '';
+            document.getElementById('ev-music').value = ev.musicBy || '';
+            document.getElementById('ev-color').value = ev.themeColor || '#d4af37';
+            document.getElementById('ev-form-title').textContent = 'Edit Event';
+            const btn = document.getElementById('ev-submit-btn');
+            btn.innerHTML = '<i class="fas fa-save"></i> <span>Update Event</span>';
+            document.getElementById('panel-events').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteEvent(i) {
+            if (confirm('Delete this event?')) {
+                siteData.events.splice(i, 1);
+                renderEvents();
+                await saveData();
+            }
+        }
+
+        // ── CARTA / MENU ──────────────────────────────────────────
+        function renderCarta() {
+            const box = document.getElementById('carta-list');
+            if (!box) return;
+            if (!siteData.carta || !siteData.carta.drinks || !siteData.carta.drinks.length) {
+                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No carta items yet. Add one below.</p>';
+                return;
+            }
+            box.innerHTML = siteData.carta.drinks.map((d, i) => `
+        <div class="item-row">
+            ${d.image
+                    ? `<img src="${d.image}" class="img-thumb-sq" alt="${d.name}">`
+                    : `<div class="no-img"><i class="fas fa-wine-glass"></i></div>`
+                }
+            <div class="item-info">
+                <strong>${d.name || 'N/A'}</strong>
+                <small>${d.category || ''} ${d.price ? '· 🥃 ' + d.price : ''} ${d.tablePrice ? '· 🍾 ' + d.tablePrice : ''}</small>
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-edit" onclick="startEditCarta(${i})"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger" onclick="deleteCarta(${i})"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>`).join('');
+        }
+
+        async function handleCartaSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('carta-submit-btn');
+            const origHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            try {
+                const fileInput = document.getElementById('crt-img');
+                let imageUrl = editingCartaIndex > -1 ? (siteData.carta.drinks[editingCartaIndex].image || '') : '';
+                if (fileInput && fileInput.files[0]) imageUrl = await uploadFile(fileInput);
+
+                const item = {
+                    id: editingCartaIndex > -1 ? siteData.carta.drinks[editingCartaIndex].id : 'crt-' + Date.now(),
+                    image: imageUrl,
+                    name: document.getElementById('crt-name').value,
+                    category: document.getElementById('crt-cat').value,
+                    price: document.getElementById('crt-price').value,
+                    tablePrice: document.getElementById('crt-table').value
+                };
+
+                if (editingCartaIndex > -1) {
+                    siteData.carta.drinks[editingCartaIndex] = item;
+                    editingCartaIndex = -1;
+                } else {
+                    siteData.carta.drinks.push(item);
+                }
+
+                e.target.reset();
+                document.getElementById('carta-form-title').textContent = 'Add Drink / Bottle';
+                btn.innerHTML = '<i class="fas fa-plus"></i> <span>Add to Carta</span>';
+                renderCarta();
+                await saveData();
+            } catch (err) {
+                alert('Error: ' + err.message);
+                btn.innerHTML = origHTML;
+            }
+        }
+
+        function startEditCarta(i) {
+            editingCartaIndex = i;
+            const d = siteData.carta.drinks[i];
+            document.getElementById('crt-name').value = d.name || '';
+            document.getElementById('crt-cat').value = d.category || 'Bières';
+            document.getElementById('crt-price').value = d.price || '';
+            document.getElementById('crt-table').value = d.tablePrice || '';
+            document.getElementById('carta-form-title').textContent = 'Edit Drink';
+            const btn = document.getElementById('carta-submit-btn');
+            btn.innerHTML = '<i class="fas fa-save"></i> <span>Update Item</span>';
+            document.getElementById('panel-carta').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteCarta(i) {
+            if (confirm('Delete this carta item?')) {
+                siteData.carta.drinks.splice(i, 1);
+                renderCarta();
+                await saveData();
+            }
+        }
+
+        // ── GALLERY / PHOTOS ──────────────────────────────────────
+        function renderPhotos() {
+            const box = document.getElementById('photos-list');
+            if (!box) return;
+            if (!siteData.photos.length) {
+                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No media uploaded yet.</p>';
+                return;
+            }
+            box.innerHTML = siteData.photos.map((p, i) => `
+        <div class="item-row">
+            ${p.type === 'image'
+                    ? `<img src="${p.src}" class="img-thumb-sq" alt="${p.alt || ''}">`
+                    : `<video src="${p.src}" class="img-thumb-sq" muted></video>`
+                }
+            <div class="item-info">
+                <strong>${p.alt || 'No caption'}</strong>
+                <small>${p.type || 'image'} · ${p.src}</small>
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-edit" onclick="startEditPhoto(${i})"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger" onclick="deletePhoto(${i})"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>`).join('');
+        }
+
+        function startEditPhoto(i) {
+            const p = siteData.photos[i];
+            const newCaption = prompt('Edit caption/description:', p.alt || '');
+            if (newCaption !== null) {
+                siteData.photos[i].alt = newCaption;
+                renderPhotos();
+                saveData();
+            }
+        }
+
+        async function handlePhotoSubmit(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('p-file');
+            const alt = document.getElementById('p-alt').value;
+            if (!fileInput.files[0]) { alert('Please select a file to upload.'); return; }
+
+            const fd = new FormData();
+            fd.append('image', fileInput.files[0]);
+            const res = await fetch('/api/upload', { method: 'POST', body: fd });
+            const result = await res.json();
+            const isVideo = fileInput.files[0].type.startsWith('video');
+
+            siteData.photos.push({ id: 'p-' + Date.now(), type: isVideo ? 'video' : 'image', src: result.url, alt });
+            fileInput.value = '';
+            document.getElementById('p-alt').value = '';
+            renderPhotos();
+            await saveData();
+        }
+
+        async function deletePhoto(i) {
+            if (confirm('Delete this media item?')) {
+                siteData.photos.splice(i, 1);
+                renderPhotos();
+                await saveData();
+            }
+        }
+
+        // ── SETTINGS ──────────────────────────────────────────────
+        async function handleSettingsSubmit(e) {
+            e.preventDefault();
+            if (!siteData.settings) siteData.settings = {};
+            siteData.settings.tiktok = document.getElementById('set-tiktok').value;
+            siteData.settings.instagram = document.getElementById('set-insta').value;
+            siteData.settings.facebook = document.getElementById('set-fb').value;
+            siteData.settings.whatsapp = document.getElementById('set-wa').value;
+            siteData.settings.phone = document.getElementById('set-phone').value;
+            await saveData();
+        }
+
+        async function handleAuthSubmit(e) {
+            e.preventDefault();
+            if (!confirm('Are you sure you want to change the admin credentials? You will be logged out.')) return;
+            if (!siteData.auth) siteData.auth = {};
+            siteData.auth.username = document.getElementById('set-user').value;
+            siteData.auth.password = document.getElementById('set-pass').value;
+            await saveData();
+            alert('Credentials updated successfully! Logging you out now.');
+            logout();
+        }
+
+        // ── SAVE DATA ─────────────────────────────────────────────
+        async function saveData() {
+            const btn = document.getElementById('save-all');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;SAVING...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(siteData)
+                });
+                if (!res.ok) throw new Error('Server returned ' + res.status);
+
+                const toast = document.getElementById('toast');
+                toast.textContent = '✓ Saved successfully!';
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 3000);
+            } catch (err) {
+                alert('SAVE FAILED: ' + err.message);
+            } finally {
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

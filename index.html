@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Nana Club Tanger – The premier Arab Gulf nightclub on the Corniche of Tanger. Gold VIP Bar, dance floor, and unforgettable nights.">
+    <title>NANA CLUB | Tanger – Premier Nightclub</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=Cairo:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- PARTICLE BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NOISE OVERLAY -->
+    <div class="noise-overlay"></div>
+
+    <!-- TOP TICKER BAR -->
+    <div class="top-ticker">
+        <div class="ticker-track">
+            <span data-i18n="ticker_1">✦ NANA CLUB TANGER ✦ KHALEEJI · MOROCCAN · LEBANESE MUSIC ✦ GOLD VIP BAR OPEN
+                NIGHTLY ✦ CORNICHE AVE MOHAMMED VI · PARKING P.7 ✦ TABLE RESERVATIONS AVAILABLE</span>
+            <span data-i18n="ticker_1">✦ NANA CLUB TANGER ✦ KHALEEJI · MOROCCAN · LEBANESE MUSIC ✦ GOLD VIP BAR OPEN
+                NIGHTLY ✦ CORNICHE AVE MOHAMMED VI · PARKING P.7 ✦ TABLE RESERVATIONS AVAILABLE</span>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <div class="logo-emblem">
+                    <div class="logo-diamond"></div>
+                    <span class="logo-n">N</span>
+                </div>
+                <div class="logo-text-wrap">
+                    <span class="logo-name">NANA</span>
+                    <span class="logo-sub">CLUB · TANGER</span>
+                </div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links-wrapper" id="navWrapper">
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
+                    <li><a href="#gold-bar" class="nav-link" data-i18n="nav_gold_bar">Gold VIP Bar</a></li>
+                    <li><a href="#events" class="nav-link" data-i18n="nav_events">Events</a></li>
+                    <li><a href="#gallery" class="nav-link" data-i18n="nav_gallery">Gallery</a></li>
+                    <li><a href="#" onclick="openCarta(event)" class="nav-link" data-i18n="nav_menu">Menu</a></li>
+                    <li><a href="#contact" class="nav-link nav-reserve" data-i18n="nav_reserve">🌙 Reserve</a></li>
+                    <li class="lang-switcher">
+                        <span class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</span> |
+                        <span class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</span> |
+                        <span class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</span> |
+                        <span class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">AR</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+        <div class="hero-bg-slider">
+            <div class="hero-slide active" style="background-image: url('hero.png');"></div>
+            <div class="hero-slide" style="background-image: url('party.png');"></div>
+            <div class="hero-slide" style="background-image: url('dj.png');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-lasers">
+            <div class="laser l1"></div>
+            <div class="laser l2"></div>
+            <div class="laser l3"></div>
+            <div class="laser l4"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="hero_badge">✦ TANGER'S PREMIER NIGHTCLUB ✦</div>
+            <h1 class="hero-title">
+                <span class="ht-nana">NANA</span>
+                <span class="ht-club">CLUB</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">La Première Discothèque · Late Night Soirée</p>
+            <p class="hero-desc" data-i18n="hero_desc">Khaleeji · Moroccan · Lebanese · International Sounds<br>on the
+                Corniche of Tanger</p>
+            <div class="hero-cta-group">
+                <a href="#contact" class="cta-btn cta-primary">
+                    <i class="fab fa-whatsapp"></i> <span data-i18n="hero_btn_reserve">Reserve VIP Table</span>
+                </a>
+                <a href="#gold-bar" class="cta-btn cta-ghost">
+                    <i class="fas fa-star"></i> <span data-i18n="hero_btn_gold">Gold VIP Bar</span>
+                </a>
+            </div>
+            <div class="hero-scroll-hint">
+                <span data-i18n="hero_scroll">SCROLL</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+
+        <div class="hero-social">
+            <a id="hs-insta" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a id="hs-tiktok" href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a id="hs-fb" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
+        <div class="section-glow-left"></div>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="section-badge" data-i18n="about_badge">✦ Welcome</div>
+                    <h2 class="section-title"><span data-i18n="about_title_1">Where </span> <span class="gold"
+                            data-i18n="about_location">Tanger</span> <span data-i18n="about_title_2">Comes Alive</span>
+                    </h2>
+                    <p class="about-desc" data-i18n="about_desc_1">Nana Club is Tanger's most prestigious nightlife
+                        destination, perched on the
+                        iconic Corniche of Avenue Mohammed VI. We bring together the finest in Khaleeji, Moroccan, and
+                        Lebanese music with world-class DJs, creating an atmosphere unlike anywhere else in North
+                        Africa.</p>
+                    <p class="about-desc" data-i18n="about_desc_2">From our exclusive Gold VIP Bar to our electric dance
+                        floor — every night is a
+                        late-night soirée crafted for those who demand only the best.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-num">15+</div>
+                            <div class="stat-label" data-i18n="about_stat_1">Years of Excellence</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">500+</div>
+                            <div class="stat-label" data-i18n="about_stat_2">Guests per Night</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">3</div>
+                            <div class="stat-label" data-i18n="about_stat_3">Music Styles</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-img-frame">
+                        <img src="party.png" alt="Nana Club atmosphere" class="about-img">
+                        <div class="about-img-border"></div>
+                        <div class="about-float-badge">
+                            <i class="fas fa-music"></i>
+                            <span data-i18n="about_float">Live Every Night</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOLD VIP BAR SECTION -->
+    <section id="gold-bar" class="gold-section">
+        <div class="gold-bg" style="background-image: url('gold_bar.png');"></div>
+        <div class="gold-overlay"></div>
+        <div class="container">
+            <div class="gold-content">
+                <div class="section-badge gold-badge" data-i18n="gold_badge">★ EXCLUSIVE</div>
+                <h2 class="section-title"><span data-i18n="gold_title_1">The </span><span class="gold">Gold</span> <span
+                        data-i18n="gold_title_2">VIP Bar</span></h2>
+                <p class="gold-desc" data-i18n="gold_desc">A decadent paradise adjoining Nana Club. Our Gold VIP Bar is
+                    the pinnacle of luxury
+                    — marble countertops, custom LED backlighting, and an unparalleled selection of premium spirits.
+                    Entertain and be entertained in an atmosphere crafted for the elite.</p>
+                <div class="gold-features">
+                    <div class="gf-item">
+                        <div class="gf-icon"><i class="fas fa-glass-cheers"></i></div>
+                        <div class="gf-label" data-i18n="gold_feat_1">Premium Spirits</div>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon"><i class="fas fa-crown"></i></div>
+                        <div class="gf-label" data-i18n="gold_feat_2">VIP Service</div>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon"><i class="fas fa-gem"></i></div>
+                        <div class="gf-label" data-i18n="gold_feat_3">Exclusive Ambiance</div>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon"><i class="fas fa-cocktail"></i></div>
+                        <div class="gf-label" data-i18n="gold_feat_4">Signature Cocktails</div>
+                    </div>
+                </div>
+                <a href="#contact" class="cta-btn cta-gold">
+                    <i class="fas fa-concierge-bell"></i> <span data-i18n="gold_btn">Book VIP Table</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP EXPERIENCE SECTION -->
+    <section id="vip-exp" class="vip-section">
+        <div class="container">
+            <div class="section-header centered">
+                <div class="section-badge" data-i18n="vip_badge">✦ Exclusive</div>
+                <h2 class="section-title"><span data-i18n="vip_title_1">The VIP</span> <span class="gold"
+                        data-i18n="vip_title_2">Experience</span></h2>
+                <p class="section-subtitle" data-i18n="vip_subtitle">Every detail designed for those who expect the
+                    extraordinary</p>
+            </div>
+            <div class="vip-grid">
+                <div class="vip-card">
+                    <div class="vip-card-img" style="background-image: url('vip.png');"></div>
+                    <div class="vip-card-overlay">
+                        <div class="vip-card-content">
+                            <i class="fas fa-fire-alt"></i>
+                            <h3 data-i18n="vip_card_1_title">Bottle Service</h3>
+                            <p data-i18n="vip_card_1_desc">Premium spirits delivered to your table with full VIP
+                                ceremony</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="vip-card">
+                    <div class="vip-card-img" style="background-image: url('dj.png');"></div>
+                    <div class="vip-card-overlay">
+                        <div class="vip-card-content">
+                            <i class="fas fa-headphones-alt"></i>
+                            <h3 data-i18n="vip_card_2_title">World-Class DJs</h3>
+                            <p data-i18n="vip_card_2_desc">Khaleeji, Moroccan & Lebanese hits curated nightly</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="vip-card">
+                    <div class="vip-card-img" style="background-image: url('gold_bar.png');"></div>
+                    <div class="vip-card-overlay">
+                        <div class="vip-card-content">
+                            <i class="fas fa-star"></i>
+                            <h3 data-i18n="vip_card_3_title">Gold Bar Access</h3>
+                            <p data-i18n="vip_card_3_desc">Exclusive entry to the legendary Gold VIP Bar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section id="events" class="events-section">
+        <div class="section-glow-right"></div>
+        <div class="container">
+            <div class="section-header centered">
+                <div class="section-badge" data-i18n="events_badge">✦ Upcoming</div>
+                <h2 class="section-title"><span data-i18n="events_title_1">This Week's</span> <span class="gold"
+                        data-i18n="events_title_2">Events</span></h2>
+                <p class="section-subtitle" data-i18n="events_subtitle">The nights you'll never forget</p>
+            </div>
+            <div id="events-grid" class="events-grid">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header centered">
+                <div class="section-badge" data-i18n="gallery_badge">✦ Gallery</div>
+                <h2 class="section-title"><span data-i18n="gallery_title_1">Night</span> <span class="gold"
+                        data-i18n="gallery_title_2">Highlights</span></h2>
+                <p class="section-subtitle" data-i18n="gallery_subtitle">A glimpse into Tanger's most exclusive nights
+                </p>
+            </div>
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / RESERVE SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="contact-bg" style="background-image: url('hero.png');"></div>
+        <div class="contact-overlay"></div>
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="section-badge" data-i18n="contact_badge">✦ Visit Us</div>
+                    <h2 class="section-title"><span data-i18n="contact_title_1">Find</span> <span class="gold">Nana
+                            Club</span></h2>
+                    <div class="contact-detail">
+                        <div class="cd-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="cd-text">
+                            <strong data-i18n="contact_loc_title">Location</strong>
+                            <span data-i18n="contact_loc_desc">Ave Mohammed VI, Corniche<br>Parking P.7, Tanger,
+                                Morocco</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="cd-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="cd-text">
+                            <strong data-i18n="contact_phone_title">Phone</strong>
+                            <span id="contact-phone">+212 644 347 568</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="cd-icon"><i class="fas fa-clock"></i></div>
+                        <div class="cd-text">
+                            <strong data-i18n="contact_hours_title">Opening Hours</strong>
+                            <span data-i18n="contact_hours_desc">Every Night · 10:00 PM – 4:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a id="c-insta" href="#" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a id="c-tiktok" href="#" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
+                        <a id="c-fb" href="#" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                        <a id="c-wa" href="#" target="_blank" class="social-btn wa-btn"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <a href="https://goo.gl/maps/4j7G5ZhRNeF2" target="_blank" class="cta-btn cta-ghost"
+                        style="display:inline-flex; margin-top: 20px;">
+                        <i class="fas fa-map-marked-alt"></i> <span data-i18n="contact_btn_dir">Get Directions</span>
+                    </a>
+                </div>
+
+                <div class="reserve-form-wrap">
+                    <div class="reserve-form-card">
+                        <h3 data-i18n="reserve_title"><i class="fas fa-concierge-bell"></i> Reserve Your Table</h3>
+                        <form id="reserve-form" onsubmit="handleReserve(event)">
+                            <div class="rf-group">
+                                <label data-i18n="reserve_lbl_name">Full Name</label>
+                                <input type="text" id="r-name" placeholder="Your Name" data-i18n-plc="reserve_plc_name"
+                                    required>
+                            </div>
+                            <div class="rf-row">
+                                <div class="rf-group">
+                                    <label data-i18n="reserve_lbl_phone">Phone / WhatsApp</label>
+                                    <input type="tel" id="r-phone" placeholder="+212..." required>
+                                </div>
+                                <div class="rf-group">
+                                    <label data-i18n="reserve_lbl_guests">Number of Guests</label>
+                                    <input type="number" id="r-guests" placeholder="2" min="1" max="50" required>
+                                </div>
+                            </div>
+                            <div class="rf-group">
+                                <label data-i18n="reserve_lbl_date">Event Date</label>
+                                <input type="date" id="r-date" required>
+                            </div>
+                            <div class="rf-group">
+                                <label data-i18n="reserve_lbl_type">Table Type</label>
+                                <select id="r-type">
+                                    <option value="VIP Table" data-i18n="reserve_opt_1">⭐ VIP Table</option>
+                                    <option value="Gold Bar VIP" data-i18n="reserve_opt_2">🥂 Gold Bar VIP</option>
+                                    <option value="Birthday Celebration" data-i18n="reserve_opt_3">🎂 Birthday
+                                        Celebration</option>
+                                    <option value="Corporate Event" data-i18n="reserve_opt_4">💼 Corporate Event
+                                    </option>
+                                    <option value="General Entry Reserve" data-i18n="reserve_opt_5">🎫 General Entry
+                                        Reserve</option>
+                                </select>
+                            </div>
+                            <div class="rf-group">
+                                <label data-i18n="reserve_lbl_msg">Special Requests</label>
+                                <textarea id="r-msg" rows="3" placeholder="Tell us more about your evening..."
+                                    data-i18n-plc="reserve_plc_msg"></textarea>
+                            </div>
+                            <button type="submit" class="cta-btn cta-wa" style="width:100%; justify-content:center;">
+                                <i class="fab fa-whatsapp"></i> <span data-i18n="reserve_btn">Send Reservation via
+                                    WhatsApp</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo-wrap">
+                <div class="logo-emblem" style="transform: scale(0.8);">
+                    <div class="logo-diamond"></div>
+                    <span class="logo-n">N</span>
+                </div>
+                <div>
+                    <div class="logo-name" style="font-size: 1.2rem;">NANA CLUB</div>
+                    <div class="logo-sub" data-i18n="footer_sub">TANGER · MOROCCO</div>
+                </div>
+            </div>
+            <p class="footer-copy" data-i18n="footer_copy">© 2026 Nana Club Tanger · La Première Discothèque · Corniche
+                Ave Mohammed VI · All
+                Rights Reserved</p>
+            <div class="footer-links">
+                <a href="#hero" data-i18n="nav_home">Home</a>
+                <a href="#gold-bar" data-i18n="nav_gold_bar">Gold VIP Bar</a>
+                <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+                <a href="#contact" data-i18n="nav_about">Contact</a>
+            </div>
+        </div>
+        <div
+            style="text-align:center; opacity:0.03; font-size:10px; padding: 4px; pointer-events:none; user-select:none;">
+            ihsan</div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:10000; align-items:center; justify-content:center; cursor:default; transition: opacity 0.3s ease;">
+        <div class="lb-container"
+            style="position:relative; max-width:90vw; max-height:90vh; display:flex; align-items:center; justify-content:center;">
+            <img id="lb-img" src="" alt=""
+                style="display:none; max-width:100%; max-height:90vh; border-radius:8px; box-shadow: 0 0 60px rgba(0,0,0,0.5);">
+            <video id="lb-video" src="" controls autoplay muted
+                style="display:none; max-width:100%; max-height:90vh; border-radius:8px; box-shadow: 0 0 60px rgba(0,0,0,0.5);"></video>
+
+            <button onclick="prevMedia()"
+                style="position:absolute; left:-60px; top:50%; transform:translateY(-50%); background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); color:#fff; width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:1.2rem; transition:0.3s;"><i
+                    class="fas fa-chevron-left"></i></button>
+            <button onclick="nextMedia()"
+                style="position:absolute; right:-60px; top:50%; transform:translateY(-50%); background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); color:#fff; width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:1.2rem; transition:0.3s;"><i
+                    class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <button onclick="closeLightbox()"
+            style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.05); border:none; color:#fff; width:40px; height:40px; border-radius:50%; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s;"><i
+                class="fas fa-times"></i></button>
+
+        <div id="lb-caption"
+            style="position:absolute; bottom:30px; left:0; right:0; text-align:center; color:#fff; font-size:0.9rem; letter-spacing:1px; background:rgba(0,0,0,0.5); padding:10px; backdrop-filter:blur(5px);">
+        </div>
+    </div>
+
+    <!-- CARTA (MENU) MODAL -->
+    <div id="carta-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(5,5,10,0.98); z-index:9000; align-items:center; justify-content:center; overflow-y:auto; padding: 40px 20px;">
+        <div
+            style="background:#0d0d18; border:1px solid rgba(212,175,55,0.2); border-radius:12px; width:100%; max-width:800px; padding:30px; position:relative; margin:auto;">
+            <button onclick="closeCarta()"
+                style="position:absolute; top:20px; right:20px; background:none; border:none; color:var(--gold); font-size:1.8rem; cursor:pointer;"><i
+                    class="fas fa-times"></i></button>
+            <div class="section-badge" style="margin-top: 0;" data-i18n="modal_menu_badge">✦ Menu</div>
+            <h2 class="section-title" style="margin-bottom: 30px;"><span class="gold">Nana</span> <span
+                    data-i18n="modal_menu_title">Club Carta</span></h2>
+            <div id="carta-container" style="display:flex; flex-direction:column; gap:20px;">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"
+        style="position:fixed; top:20px; right:20px; background:#d4af37; color:#000; padding:12px 20px; border-radius:8px; font-weight:600; opacity:0; transition:opacity 0.3s; z-index:9999;">
+    </div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // ─── NAVBAR ───
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navWrapper = document.getElementById('navWrapper');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navWrapper.classList.toggle('open');
+        });
+        document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            navWrapper.classList.remove('open');
+        }));
+
+        // ─── HERO SLIDER ───
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+
+        // ─── LIGHTBOX ───
+        let currentLbIndex = 0;
+        function openLightbox(index) {
+            if (!lastData || !lastData.photos) return;
+            currentLbIndex = index;
+            const p = lastData.photos[index];
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lb-img');
+            const video = document.getElementById('lb-video');
+            const caption = document.getElementById('lb-caption');
+
+            if (p.type === 'video') {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.src = p.src;
+            } else {
+                video.style.display = 'none';
+                video.pause();
+                img.style.display = 'block';
+                img.src = p.src;
+            }
+
+            caption.textContent = p.alt || '';
+            lb.style.display = 'flex';
+            lb.style.opacity = '1';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            const video = document.getElementById('lb-video');
+            video.pause();
+            lb.style.opacity = '0';
+            setTimeout(() => {
+                lb.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+        function nextMedia() {
+            if (!lastData || !lastData.photos) return;
+            currentLbIndex = (currentLbIndex + 1) % lastData.photos.length;
+            openLightbox(currentLbIndex);
+        }
+        function prevMedia() {
+            if (!lastData || !lastData.photos) return;
+            currentLbIndex = (currentLbIndex - 1 + lastData.photos.length) % lastData.photos.length;
+            openLightbox(currentLbIndex);
+        }
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').style.display === 'flex') {
+                if (e.key === 'ArrowRight') nextMedia();
+                if (e.key === 'ArrowLeft') prevMedia();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        // ─── RESERVE FORM ───
+        function handleReserve(e) {
+            e.preventDefault();
+            const name = document.getElementById('r-name').value;
+            const phone = document.getElementById('r-phone').value;
+            const guests = document.getElementById('r-guests').value;
+            const date = document.getElementById('r-date').value;
+            const type = document.getElementById('r-type').value;
+            const msg = document.getElementById('r-msg').value;
+
+            const text = `${t('wa_msg_header')}\n\n${t('wa_msg_name')}: ${name}\n${t('wa_msg_phone')}: ${phone}\n${t('wa_msg_guests')}: ${guests}\n${t('wa_msg_date')}: ${date}\n${t('wa_msg_type')}: ${type}${msg ? '\n' + t('wa_msg_notes') + ': ' + msg : ''}`;
+
+            fetch('/api/data').then(r => r.json()).then(data => {
+                const waNum = (data.settings && data.settings.whatsapp) ? data.settings.whatsapp.replace(/[^0-9]/g, '') : '212644347568';
+                window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
+            }).catch(() => {
+                window.open(`https://wa.me/212644347568?text=${encodeURIComponent(text)}`, '_blank');
+            });
+        }
+
+        // ─── CARTA MODAL ───
+        function openCarta(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('carta-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            if (window.innerWidth < 768) {
+                hamburger.classList.remove('open');
+                navWrapper.classList.remove('open');
+            }
+        }
+        function closeCarta() {
+            document.getElementById('carta-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ─── LOAD DYNAMIC DATA ───
+        let lastData = null;
+        async function loadSettings() {
+            try {
+                const res = await fetch('/api/data');
+                lastData = await res.json();
+                renderAll(lastData);
+            } catch (e) { console.error('Data load failed', e); }
+        }
+
+        function renderAll(data) {
+            if (!data) return;
+
+            // Contacts
+            if (data.settings) {
+                const s = data.settings;
+                const waLink = s.whatsapp ? `https://wa.me/${s.whatsapp.replace(/\D/g, '')}` : '#';
+                if (document.getElementById('hs-insta')) document.getElementById('hs-insta').href = s.instagram || '#';
+                if (document.getElementById('hs-tiktok')) document.getElementById('hs-tiktok').href = s.tiktok || '#';
+                if (document.getElementById('hs-fb')) document.getElementById('hs-fb').href = s.facebook || '#';
+                if (document.getElementById('c-insta')) document.getElementById('c-insta').href = s.instagram || '#';
+                if (document.getElementById('c-tiktok')) document.getElementById('c-tiktok').href = s.tiktok || '#';
+                if (document.getElementById('c-fb')) document.getElementById('c-fb').href = s.facebook || '#';
+                if (document.getElementById('c-wa')) document.getElementById('c-wa').href = waLink;
+                if (document.getElementById('contact-phone')) document.getElementById('contact-phone').textContent = s.phone || '';
+            }
+
+            // Events
+            if (data.events && data.events.length > 0) {
+                document.getElementById('events-grid').innerHTML = data.events.map((ev, i) => `
+                    <div class="event-card">
+                        <div class="event-poster">
+                            ${ev.image ? `<img src="${ev.image}" alt="Event" loading="lazy">` : `<img src="https://images.unsplash.com/photo-1514525253361-bee8718a747b?q=80&w=1000&auto=format&fit=crop" alt="Nightlife">`}
+                        </div>
+                        <div class="event-date-badge">
+                            <span class="ev-day">${ev.day ? ev.day.split(' ')[0] : ''}</span>
+                            <span class="ev-date-num">${ev.date || ''}</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="ev-music-tag">🎵 ${ev.musicBy || 'Resident DJ'}</div>
+                            <h3>${ev.details || 'Special Night'}</h3>
+                            <a href="#contact" class="ev-reserve-btn">
+                                <i class="fab fa-whatsapp"></i> 
+                                <span data-i18n="reserve_btn_event">Reserve Table</span>
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                document.getElementById('events-grid').innerHTML = '<p style="color:#666; text-align:center;">No upcoming events at the moment. Stay tuned!</p>';
+            }
+
+            // Gallery
+            if (data.photos && data.photos.length > 0) {
+                document.getElementById('gallery-grid').innerHTML = data.photos.map((p, i) => {
+                    const isVid = p.type === 'video';
+                    return `
+                    <div class="gal-item ${i === 0 ? 'large' : ''}" onclick="openLightbox(${i})">
+                        ${isVid
+                            ? `<video src="${p.src}" autoplay loop muted style="width:100%;height:100%;object-fit:cover;"></video>`
+                            : `<img src="${p.src}" alt="${p.alt || ''}" loading="lazy">`
+                        }
+                        <div class="gal-overlay">
+                            <i class="fas ${isVid ? 'fa-play' : 'fa-expand-alt'}"></i> 
+                            <span>${p.alt || ''}</span>
+                        </div>
+                    </div>`;
+                }).join('');
+            } else {
+                document.getElementById('gallery-grid').innerHTML = '<p style="color:#666; grid-column:span 3; text-align:center;">Gallery is empty.</p>';
+            }
+
+            // Carta
+            if (data.carta && data.carta.drinks && data.carta.drinks.length > 0) {
+                const categories = {};
+                data.carta.drinks.forEach(d => {
+                    const cat = d.category || 'Drinks';
+                    if (!categories[cat]) categories[cat] = [];
+                    categories[cat].push(d);
+                });
+
+                document.getElementById('carta-container').innerHTML = Object.keys(categories).map(cat => {
+                    const translatedCat = catMap[cat] ? t(catMap[cat]) : cat;
+                    return `
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 12px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 6px;">${translatedCat}</h3>
+                        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;">
+                            ${categories[cat].map(d => `
+                                <div style="background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 8px; display:flex; gap:12px; align-items:center;">
+                                    ${d.image ? `<img src="${d.image}" style="width:50px; height:50px; object-fit:cover; border-radius:6px;">` : `<div style="width:50px; height:50px; background:rgba(212,175,55,0.1); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#d4af37;"><i class="fas fa-glass-martini-alt"></i></div>`}
+                                    <div style="flex:1;">
+                                        <div style="color:#fff; font-weight:600; font-size:0.9rem;">${d.name || 'Drink'}</div>
+                                        <div style="font-size:0.75rem; color:#888;">
+                                            ${d.price ? `${t('lbl_glass')}: <span style="color:#d4af37">${d.price}</span>` : ''} 
+                                            ${d.price && d.tablePrice ? ' &middot; ' : ''}
+                                            ${d.tablePrice ? `${t('lbl_bottle')}: <span style="color:#d4af37">${d.tablePrice}</span>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                }).join('');
+            } else {
+                document.getElementById('carta-container').innerHTML = '<p style="color:#666;">Menu is currently being updated.</p>';
+            }
+
+            // Final pass for any [data-i18n] that were just injected
+            setLanguage(currentLang);
+        }
+
+        window.onLanguageChange = () => {
+            if (lastData) renderAll(lastData);
+        };
+
+        loadSettings();
+
+        // ─── PARTICLE CANVAS ───
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 80; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3,
+                alpha: Math.random() * 0.6 + 0.1
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
+                ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ─── SCROLL ANIMATIONS ───
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.about-grid, .gold-content, .vip-card, .event-card, .gal-item, .contact-grid').forEach(el => {
+            el.classList.add('fade-up');
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+{
+  "events": [
+    {
+      "id": "ev-1772678023098",
+      "image": "/uploads/1772678022846.png",
+      "day": "FRIDAY",
+      "date": "7 MARS",
+      "details": "best ",
+      "musicBy": "DJ KHALID",
+      "themeColor": "#d4af37"
+    },
+    {
+      "id": "ev-1772678572053",
+      "image": "/uploads/1772678571924.png",
+      "day": "SATURDAY",
+      "date": "8",
+      "details": "first to come first to be served ",
+      "musicBy": "DJ HAFID",
+      "themeColor": "#d44535"
+    }
+  ],
+  "carta": {
+    "drinks": [
+      {
+        "id": "crt-1772842546973",
+        "image": "",
+        "name": "margarita",
+        "category": "Shooter",
+        "price": "100",
+        "tablePrice": "1000"
+      }
+    ]
+  },
+  "photos": [
+    {
+      "id": "p-1772678480769",
+      "type": "image",
+      "src": "/uploads/1772678480497.png",
+      "alt": ""
+    },
+    {
+      "id": "p-1772678904499",
+      "type": "image",
+      "src": "/uploads/1772678904334.png",
+      "alt": "best night"
+    }
+  ],
+  "settings": {
+    "tiktok": "https://www.tiktok.com/@nanaclub",
+    "whatsapp": "+212717430045",
+    "instagram": "https://www.instagram.com/nana_club_tanger/",
+    "facebook": "https://www.facebook.com/nanaclub",
+    "phone": "+212 717430045"
+  },
+  "auth": {
+    "username": "admin",
+    "password": "nana2024"
+  }
+}
