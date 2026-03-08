@@ -105,25 +105,20 @@ body {
     }
 }
 
-/* ─── NAVBAR ─── */
 .navbar {
-    position: fixed;
+    position: absolute;
     top: 32px;
     left: 0;
     right: 0;
     z-index: 200;
     padding: 16px 0;
     transition: var(--transition);
+    background: rgba(5, 5, 8, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.navbar.scrolled {
-    background: rgba(5, 5, 8, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
+/* navbar scrolled state removed — navbar stays at top */
 
 .nav-inner {
     max-width: 1300px;

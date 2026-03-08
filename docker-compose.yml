@@ -1,0 +1,46 @@
+services:
+  nana-club:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nana-club
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-3001}:${PORT:-3001}"
+    volumes:
+      # Persist uploaded media and data across container restarts
+      - nana-uploads:/app/uploads
+      - nana-data:/app/data.json
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:${PORT:-3001}/health"]
+      interval: 30s
+      timeout: 5s
+      start-period: 10s
+      retries: 3
+    networks:
+      - nana-network
+    labels:
+      # ─── Coolify / Traefik labels ───
+      - "traefik.enable=true"
+      - "traefik.http.routers.nana-club.rule=Host(`${DOMAIN:-nanaclub.local}`)"
+      - "traefik.http.routers.nana-club.entrypoints=websecure"
+      - "traefik.http.routers.nana-club.tls.certresolver=letsencrypt"
+      - "traefik.http.services.nana-club.loadbalancer.server.port=${PORT:-3001}"
+      # HTTP → HTTPS redirect
+      - "traefik.http.routers.nana-club-http.rule=Host(`${DOMAIN:-nanaclub.local}`)"
+      - "traefik.http.routers.nana-club-http.entrypoints=web"
+      - "traefik.http.routers.nana-club-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+volumes:
+  nana-uploads:
+    driver: local
+  nana-data:
+    driver: local
+
+networks:
+  nana-network:
+    external: true
+    name: coolify

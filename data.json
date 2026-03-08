@@ -17,13 +17,22 @@
       "details": "first to come first to be served ",
       "musicBy": "DJ HAFID",
       "themeColor": "#d44535"
+    },
+    {
+      "id": "ev-1773007824916",
+      "image": "/uploads/1773007824896.png",
+      "day": "MONDAY",
+      "date": "MONDAY 23",
+      "details": "music",
+      "musicBy": "DJ HANAN",
+      "themeColor": "#356ad4"
     }
   ],
   "carta": {
     "drinks": [
       {
         "id": "crt-1772842546973",
-        "image": "",
+        "image": "/uploads/1773007771625.png",
         "name": "margarita",
         "category": "Shooter",
         "price": "100",
@@ -43,6 +52,12 @@
       "type": "image",
       "src": "/uploads/1772678904334.png",
       "alt": "best night"
+    },
+    {
+      "id": "p-1773007744619",
+      "type": "image",
+      "src": "/uploads/1773007744603.png",
+      "alt": "best nights"
     }
   ],
   "settings": {
