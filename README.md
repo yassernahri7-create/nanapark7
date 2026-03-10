@@ -1,114 +1,120 @@
-# Nana Club – Deployment Guide
+# Nana Club Tanger
 
-## 🏗️ Tech Stack
+Deployable website and admin panel for the Nana Club product site.
 
-| Layer | Technology |
-|-------|-----------|
-| Runtime | Node.js 20 (Alpine) |
-| Framework | Express 4 |
-| Storage | JSON file + disk uploads |
-| Container | Docker (multi-stage) |
-| Reverse Proxy | Traefik (via Coolify) |
+## Architecture
 
----
+- `website-server.js`: public website API and static site
+- `admin-server.js`: protected admin API and admin UI
+- shared persistent data in `data.json`
+- shared uploads directory in `uploads/`
 
-## 🖥️ Run Locally (No Docker)
+The admin is configured for a separate subdomain:
 
-```bash
-npm install
-npm start
+- website: `nana.ibnbatoutaweb.com`
+- admin: `admin.nana.ibnbatoutaweb.com`
+
+## Local development
+
+1. Install dependencies:
+   ```bash
+   npm ci
+   ```
+2. Start the website:
+   ```bash
+   npm run start:website
+   ```
+3. Start the admin:
+   ```bash
+   ADMIN_USER=admin ADMIN_PASS=change-me-now npm run start:admin
+   ```
+
+Local URLs:
+
+- website: `http://localhost:3001`
+- admin: `http://localhost:3101/admin`
+
+## Security model
+
+- public site can only read site data
+- admin login is server-side and cookie-based
+- admin credentials come from `ADMIN_USER` / `ADMIN_PASS`
+- uploads require admin authentication
+- site data no longer stores admin credentials
+
+## Data bootstrap note
+
+This repo does not currently include the media files referenced under `/uploads/...` in `data.json`. The deployment setup will preserve the JSON content, but you need to restore the actual media files into `uploads/` if you want those existing images to render.
+
+## Deploy to Coolify
+
+Use Docker Compose.
+
+### Environment variables
+
+- `WEBSITE_PORT=3001`
+- `ADMIN_PORT=3101`
+- `PRODUCT_DOMAIN=nana.ibnbatoutaweb.com`
+- `ADMIN_DOMAIN=admin.nana.ibnbatoutaweb.com`
+- `ADMIN_USER=admin`
+- `ADMIN_PASS=<strong-password>`
+- `COOKIE_SECURE=true`
+- `DATA_FILE=/app/data/data.json`
+- `UPLOADS_DIR=/app/uploads`
+
+### Coolify domain fields
+
+Use generated domains first. After they work over HTTPS, move to custom domains one by one.
+
+- website service: `https://nana.ibnbatoutaweb.com:3001`
+- admin service: `https://admin.nana.ibnbatoutaweb.com:3101`
+
+Do not start with bare hostnames in the domain fields. Use full HTTPS FQDNs with ports.
+
+### DNS strategy
+
+For first deployment:
+
+- `A panel -> <server-ip>`
+- `A * -> <server-ip>`
+
+After custom domains are stable, keep only:
+
+- `A panel -> <server-ip>`
+- `A nana -> <server-ip>`
+- `A admin.nana -> <server-ip>`
+
+Add `AAAA` records only after IPv4 HTTP/HTTPS is confirmed working.
+
+## Deployment scripts
+
+Generate `.env` for the Nana subdomain:
+
+```powershell
+pwsh ./scripts/setup-env.ps1 -ParentDomain ibnbatoutaweb.com -ProductSubdomain nana
 ```
 
-- **Website:** http://localhost:3001/
-- **Admin:** http://localhost:3001/admin.html
-- **Credentials:** `admin` / `nana2024`
+The generated local `.env` keeps `COOKIE_SECURE=false` for HTTP testing. In Coolify production, set `COOKIE_SECURE=true`.
 
----
+Deploy locally with Docker:
 
-## 🐳 Run with Docker
-
-### 1. Create your `.env` file
-
-```bash
-cp .env.example .env
-# Edit .env with your domain and desired port
+```powershell
+pwsh ./scripts/deploy-local.ps1
 ```
 
-### 2. Build & Start
+Commit, push, and optionally trigger Coolify directly:
 
-```bash
-docker compose up -d --build
+```powershell
+pwsh ./scripts/push-and-deploy.ps1 -Branch main -Remote origin
 ```
 
-### 3. Verify
+## GitHub auto-deploy
 
-```bash
-# Check health
-curl http://localhost:3001/health
+This repo includes `.github/workflows/deploy.yml`.
 
-# View logs
-docker compose logs -f nana-club
-```
+Set these repository secrets:
 
-### 4. Stop
-
-```bash
-docker compose down
-```
-
----
-
-## ☁️ Deploy with Coolify
-
-### Option A: Docker Compose (Recommended)
-
-1. In Coolify, create a new **Docker Compose** service
-2. Connect your GitHub repo: `yassernahri7-create/nanapark7`
-3. Set environment variables in Coolify:
-   - `PORT=3001`
-   - `DOMAIN=yourdomain.com`
-4. Coolify will auto-detect the `docker-compose.yml` and deploy
-
-### Option B: Dockerfile
-
-1. In Coolify, create a new **Dockerfile** service
-2. Connect your GitHub repo
-3. Set the port to `3001`
-4. Configure the domain in Coolify's UI
-5. Coolify auto-builds and routes via Traefik
-
-### Persistent Data
-
-Uploaded images and `data.json` are stored in Docker volumes:
-- `nana-uploads` → `/app/uploads`
-- `nana-data` → `/app/data.json`
-
-These persist across container restarts and redeployments.
-
----
-
-## 📁 Project Structure
-
-```
-├── Dockerfile              # Multi-stage production build
-├── docker-compose.yml      # Compose config with Traefik labels
-├── .env.example            # Environment variable template
-├── .dockerignore           # Files excluded from Docker build
-├── server.js               # Express API server
-├── index.html              # Main website
-├── admin.html              # Admin panel
-├── style.css               # Styles
-├── i18n.js                 # Multi-language support (EN/FR/AR/ES)
-├── data.json               # Site data (events, menu, settings)
-└── uploads/                # User-uploaded media
-```
-
----
-
-## 🔧 Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PORT` | `3001` | Server port |
-| `DOMAIN` | `nanaclub.local` | Domain for Traefik routing |
-| `NODE_ENV` | `production` | Node environment |
+- `COOLIFY_WEBHOOK_PROD`
+- `COOLIFY_TOKEN_PROD`
+- `COOLIFY_WEBHOOK_STAGING` (optional)
+- `COOLIFY_TOKEN_STAGING` (optional)

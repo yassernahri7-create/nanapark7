@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nana Club – Admin Panel</title>
+    <title>Nana Club â€“ Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600;700&display=swap"
@@ -36,7 +36,7 @@
             min-height: 100vh;
         }
 
-        /* ── LOGIN OVERLAY ── */
+        /* â”€â”€ LOGIN OVERLAY â”€â”€ */
         #login-overlay {
             position: fixed;
             inset: 0;
@@ -120,14 +120,14 @@
             background: rgba(212, 175, 55, 0.1);
         }
 
-        /* ── LAYOUT ── */
+        /* â”€â”€ LAYOUT â”€â”€ */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 30px 20px 60px;
         }
 
-        /* ── SAVE-BTN (login form submit) ── */
+        /* â”€â”€ SAVE-BTN (login form submit) â”€â”€ */
         .save-btn {
             display: block;
             width: 100%;
@@ -172,7 +172,7 @@
             gap: 12px;
         }
 
-        /* ── TABS ── */
+        /* â”€â”€ TABS â”€â”€ */
         .tabs {
             display: flex;
             gap: 6px;
@@ -209,7 +209,7 @@
             border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
-        /* ── PANELS ── */
+        /* â”€â”€ PANELS â”€â”€ */
         .panel {
             display: none;
         }
@@ -238,7 +238,7 @@
             text-transform: uppercase;
         }
 
-        /* ── FORM ── */
+        /* â”€â”€ FORM â”€â”€ */
         .form-group {
             margin-bottom: 16px;
         }
@@ -297,7 +297,7 @@
             gap: 14px;
         }
 
-        /* ── BUTTONS ── */
+        /* â”€â”€ BUTTONS â”€â”€ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -363,7 +363,7 @@
             padding: 14px;
         }
 
-        /* ── CARD BOX ── */
+        /* â”€â”€ CARD BOX â”€â”€ */
         .card-box {
             background: var(--card);
             border: 1px solid var(--border);
@@ -372,7 +372,7 @@
             margin-bottom: 24px;
         }
 
-        /* ── ITEM LIST ── */
+        /* â”€â”€ ITEM LIST â”€â”€ */
         .item-list {
             display: flex;
             flex-direction: column;
@@ -451,7 +451,7 @@
             text-align: center;
         }
 
-        /* ── SECURITY BOX ── */
+        /* â”€â”€ SECURITY BOX â”€â”€ */
         .security-box {
             background: rgba(231, 76, 60, 0.04);
             border: 1px solid rgba(231, 76, 60, 0.18);
@@ -470,7 +470,7 @@
             margin-bottom: 20px;
         }
 
-        /* ── SAVE ALL BUTTON ── */
+        /* â”€â”€ SAVE ALL BUTTON â”€â”€ */
         #save-all {
             display: block;
             width: 100%;
@@ -494,7 +494,7 @@
             box-shadow: 0 6px 25px rgba(212, 175, 55, 0.35);
         }
 
-        /* ── TOAST ── */
+        /* â”€â”€ TOAST â”€â”€ */
         .toast {
             position: fixed;
             top: 20px;
@@ -512,7 +512,7 @@
             letter-spacing: 1px;
         }
 
-        /* ── RESPONSIVE ── */
+        /* â”€â”€ RESPONSIVE â”€â”€ */
         @media (max-width: 650px) {
 
             .form-row,
@@ -549,7 +549,7 @@
                 padding: 16px 12px 80px;
             }
 
-            /* Tabs: 2×2 grid on phone */
+            /* Tabs: 2Ã—2 grid on phone */
             .tabs {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -646,12 +646,12 @@
 
 <body>
 
-    <!-- ═══════════════ LOGIN OVERLAY ═══════════════ -->
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• LOGIN OVERLAY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div id="login-overlay">
         <div class="login-box">
             <div class="logo">
                 <div class="logo-diamond"><span>N</span></div>
-                <h2 data-i18n="admin_title">Nana Club – Admin Panel</h2>
+                <h2 data-i18n="admin_title">Nana Club â€“ Admin Panel</h2>
                 <p data-i18n="admin_login_sub">Management Suite</p>
             </div>
             <form onsubmit="handleLogin(event)" style="margin-top: 25px;">
@@ -661,7 +661,7 @@
                 </div>
                 <div class="form-group">
                     <label data-i18n="admin_pass_lbl">Password</label>
-                    <input type="password" id="login-pass" placeholder="••••••••" required>
+                    <input type="password" id="login-pass" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
                 </div>
                 <button type="submit" class="save-btn" style="width: 100%; margin-top: 10px;"
                     data-i18n="admin_login_btn">Enter Dashboard</button>
@@ -676,10 +676,10 @@
         </div>
     </div>
 
-    <!-- ═══════════════ MAIN PANEL ═══════════════ -->
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN PANEL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="container">
         <div class="admin-header">
-            <h1 data-i18n="admin_title"><i class="fas fa-sliders-h"></i> Nana Club – Admin Panel</h1>
+            <h1 data-i18n="admin_title"><i class="fas fa-sliders-h"></i> Nana Club â€“ Admin Panel</h1>
             <div style="display: flex; align-items: center; gap: 20px;">
                 <div class="lang-switcher-admin" style="margin-top: 0;">
                     <span class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</span>
@@ -710,7 +710,7 @@
             </button>
         </div>
 
-        <!-- ══ EVENTS PANEL ══ -->
+        <!-- â•â• EVENTS PANEL â•â• -->
         <div id="panel-events" class="panel active">
             <h2><i class="fas fa-calendar-day"></i> Manage Events</h2>
             <div id="events-list" class="item-list">
@@ -736,7 +736,7 @@
                     <div class="form-group">
                         <label>Details / Description (line breaks allowed)</label>
                         <textarea id="ev-details" rows="3" required
-                            placeholder="KHALEEJI NIGHT · OPEN BAR MIDNIGHT · RESERVE YOUR TABLE NOW"></textarea>
+                            placeholder="KHALEEJI NIGHT Â· OPEN BAR MIDNIGHT Â· RESERVE YOUR TABLE NOW"></textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -755,7 +755,7 @@
             </div>
         </div>
 
-        <!-- ══ CARTA PANEL ══ -->
+        <!-- â•â• CARTA PANEL â•â• -->
         <div id="panel-carta" class="panel">
             <h2><i class="fas fa-wine-glass-alt"></i> Manage Carta (Drinks & Menu)</h2>
             <div id="carta-list" class="item-list">
@@ -776,8 +776,8 @@
                         <div class="form-group">
                             <label>Category</label>
                             <select id="crt-cat">
-                                <option value="Bières">Bières</option>
-                                <option value="Apèritif">Apèritif</option>
+                                <option value="BiÃ¨res">BiÃ¨res</option>
+                                <option value="ApÃ¨ritif">ApÃ¨ritif</option>
                                 <option value="Liqueur">Liqueur</option>
                                 <option value="Single Malt">Single Malt</option>
                                 <option value="Cognac">Cognac</option>
@@ -789,8 +789,8 @@
                                 <option value="Vodka">Vodka</option>
                                 <option value="Gin">Gin</option>
                                 <option value="Whisky">Whisky</option>
-                                <option value="Cocktails Alcoolisès">Cocktails Alcoolisès</option>
-                                <option value="Cocktails sans Alcoolisès">Cocktails sans Alcoolisès</option>
+                                <option value="Cocktails AlcoolisÃ¨s">Cocktails AlcoolisÃ¨s</option>
+                                <option value="Cocktails sans AlcoolisÃ¨s">Cocktails sans AlcoolisÃ¨s</option>
                             </select>
                         </div>
                     </div>
@@ -811,7 +811,7 @@
             </div>
         </div>
 
-        <!-- ══ GALLERY PANEL ══ -->
+        <!-- â•â• GALLERY PANEL â•â• -->
         <div id="panel-photos" class="panel">
             <h2><i class="fas fa-images"></i> Manage Gallery</h2>
             <div id="photos-list" class="item-list">
@@ -835,7 +835,7 @@
             </div>
         </div>
 
-        <!-- ══ SETTINGS PANEL ══ -->
+        <!-- â•â• SETTINGS PANEL â•â• -->
         <div id="panel-settings" class="panel">
             <h2><i class="fas fa-cog"></i> Global Settings</h2>
             <div class="card-box">
@@ -870,25 +870,10 @@
                     </button>
                 </form>
 
-                <div class="security-box">
+                                <div class="security-box">
                     <h3><i class="fas fa-shield-alt"></i> &nbsp;Security & Access</h3>
-                    <p>Update your admin login credentials. Make sure to remember them — they are required to access
-                        this panel.</p>
-                    <form id="form-auth" onsubmit="handleAuthSubmit(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Admin Username</label>
-                                <input type="text" id="set-user" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Admin Password</label>
-                                <input type="password" id="set-pass" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-orange btn-full">
-                            <i class="fas fa-key"></i> Update Admin Credentials
-                        </button>
-                    </form>
+                    <p>Admin access is controlled by the server environment variables <code>ADMIN_USER</code> and <code>ADMIN_PASS</code>. Update them in Coolify or your local <code>.env</code> file when you need to rotate credentials.</p>
+                </div>
                 </div>
             </div>
         </div>
@@ -900,392 +885,8 @@
 
     <div id="toast" class="toast"></div>
 
-    <script src="i18n.js"></script>
-    <script>
-        // ─────────────────────────────────────────────────────────
-        window.onerror = function (msg, url, line, col, err) {
-            console.error('Error:', msg, url, line);
-            return false;
-        };
-
-        let siteData = { events: [], carta: { drinks: [] }, photos: [], settings: {}, auth: {} };
-        let editingEventIndex = -1;
-        let editingCartaIndex = -1;
-
-        // ── AUTH ──────────────────────────────────────────────────
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('nana_admin') === 'true') {
-                document.getElementById('login-overlay').style.display = 'none';
-                loadData();
-            }
-        });
-
-        function logout() {
-            localStorage.removeItem('nana_admin');
-            window.location.reload();
-        }
-
-        async function handleLogin(e) {
-            e.preventDefault();
-            const username = document.getElementById('login-user').value;
-            const password = document.getElementById('login-pass').value;
-            try {
-                const res = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                const result = await res.json();
-                if (res.ok) {
-                    localStorage.setItem('nana_admin', 'true');
-                    document.getElementById('login-overlay').style.display = 'none';
-                    loadData();
-                } else {
-                    alert('Invalid credentials. Default: admin / nana2024');
-                }
-            } catch (err) {
-                alert('Login error: ' + err.message);
-            }
-        }
-
-        // ── TABS ──────────────────────────────────────────────────
-        function switchTab(e, id) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            e.currentTarget.classList.add('active');
-            const p = document.getElementById('panel-' + id);
-            if (p) p.classList.add('active');
-        }
-
-        // ── LOAD DATA ─────────────────────────────────────────────
-        async function loadData() {
-            try {
-                const res = await fetch('/api/data');
-                if (!res.ok) throw new Error('Server returned ' + res.status);
-                const data = await res.json();
-                siteData = {
-                    events: data.events || [],
-                    carta: { drinks: (data.carta && data.carta.drinks) ? data.carta.drinks : [] },
-                    photos: data.photos || [],
-                    settings: data.settings || {},
-                    auth: data.auth || {}
-                };
-                renderAll();
-            } catch (err) {
-                alert('Failed to load data: ' + err.message);
-            }
-        }
-
-        function renderAll() {
-            renderEvents();
-            renderCarta();
-            renderPhotos();
-            if (siteData.settings) {
-                document.getElementById('set-tiktok').value = siteData.settings.tiktok || '';
-                document.getElementById('set-insta').value = siteData.settings.instagram || '';
-                document.getElementById('set-fb').value = siteData.settings.facebook || '';
-                document.getElementById('set-wa').value = siteData.settings.whatsapp || '';
-                document.getElementById('set-phone').value = siteData.settings.phone || '';
-            }
-            if (siteData.auth) {
-                document.getElementById('set-user').value = siteData.auth.username || 'admin';
-            }
-        }
-
-        // ── UPLOAD FILE ───────────────────────────────────────────
-        async function uploadFile(fileInput) {
-            if (!fileInput || !fileInput.files[0]) return '';
-            const fd = new FormData();
-            fd.append('image', fileInput.files[0]);
-            const res = await fetch('/api/upload', { method: 'POST', body: fd });
-            const data = await res.json();
-            return data.url || '';
-        }
-
-        // ── EVENTS ────────────────────────────────────────────────
-        function renderEvents() {
-            const box = document.getElementById('events-list');
-            if (!box) return;
-            if (!siteData.events.length) {
-                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No events yet. Add one below.</p>';
-                return;
-            }
-            box.innerHTML = siteData.events.map((ev, i) => `
-        <div class="item-row">
-            ${ev.image
-                    ? `<img src="${ev.image}" class="img-thumb" alt="${ev.day}">`
-                    : `<div class="no-img"><i class="fas fa-calendar"></i></div>`
-                }
-            <div class="item-info">
-                <strong style="color:${ev.themeColor || '#d4af37'}">${ev.day || 'N/A'}</strong>
-                <small>${ev.date || 'No date'} · 🎵 ${ev.musicBy || 'N/A'}</small>
-                <small style="display:block; margin-top:4px; white-space:pre-line; opacity:0.7;">${ev.details || ''}</small>
-            </div>
-            <div class="item-actions">
-                <button class="btn btn-edit" onclick="startEditEvent(${i})"><i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger" onclick="deleteEvent(${i})"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>`).join('');
-        }
-
-        async function handleEventSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('ev-submit-btn');
-            const origHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
-            try {
-                const fileInput = document.getElementById('ev-img');
-                let imageUrl = editingEventIndex > -1 ? (siteData.events[editingEventIndex].image || '') : '';
-                if (fileInput && fileInput.files[0]) imageUrl = await uploadFile(fileInput);
-
-                const ev = {
-                    id: editingEventIndex > -1 ? siteData.events[editingEventIndex].id : 'ev-' + Date.now(),
-                    image: imageUrl,
-                    day: (document.getElementById('ev-day').value || '').toUpperCase(),
-                    date: (document.getElementById('ev-date').value || '').toUpperCase(),
-                    details: document.getElementById('ev-details').value || '',
-                    musicBy: (document.getElementById('ev-music').value || '').toUpperCase(),
-                    themeColor: document.getElementById('ev-color').value || '#d4af37'
-                };
-
-                if (editingEventIndex > -1) {
-                    siteData.events[editingEventIndex] = ev;
-                    editingEventIndex = -1;
-                } else {
-                    siteData.events.push(ev);
-                }
-
-                e.target.reset();
-                document.getElementById('ev-color').value = '#d4af37';
-                document.getElementById('ev-form-title').textContent = 'Add New Event';
-                btn.innerHTML = '<i class="fas fa-plus"></i> <span>Add Event</span>';
-                renderEvents();
-                await saveData();
-            } catch (err) {
-                alert('Error: ' + err.message);
-                btn.innerHTML = origHTML;
-            }
-        }
-
-        function startEditEvent(i) {
-            editingEventIndex = i;
-            const ev = siteData.events[i];
-            document.getElementById('ev-day').value = ev.day || '';
-            document.getElementById('ev-date').value = ev.date || '';
-            document.getElementById('ev-details').value = ev.details || '';
-            document.getElementById('ev-music').value = ev.musicBy || '';
-            document.getElementById('ev-color').value = ev.themeColor || '#d4af37';
-            document.getElementById('ev-form-title').textContent = 'Edit Event';
-            const btn = document.getElementById('ev-submit-btn');
-            btn.innerHTML = '<i class="fas fa-save"></i> <span>Update Event</span>';
-            document.getElementById('panel-events').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        async function deleteEvent(i) {
-            if (confirm('Delete this event?')) {
-                siteData.events.splice(i, 1);
-                renderEvents();
-                await saveData();
-            }
-        }
-
-        // ── CARTA / MENU ──────────────────────────────────────────
-        function renderCarta() {
-            const box = document.getElementById('carta-list');
-            if (!box) return;
-            if (!siteData.carta || !siteData.carta.drinks || !siteData.carta.drinks.length) {
-                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No carta items yet. Add one below.</p>';
-                return;
-            }
-            box.innerHTML = siteData.carta.drinks.map((d, i) => `
-        <div class="item-row">
-            ${d.image
-                    ? `<img src="${d.image}" class="img-thumb-sq" alt="${d.name}">`
-                    : `<div class="no-img"><i class="fas fa-wine-glass"></i></div>`
-                }
-            <div class="item-info">
-                <strong>${d.name || 'N/A'}</strong>
-                <small>${d.category || ''} ${d.price ? '· 🥃 ' + d.price : ''} ${d.tablePrice ? '· 🍾 ' + d.tablePrice : ''}</small>
-            </div>
-            <div class="item-actions">
-                <button class="btn btn-edit" onclick="startEditCarta(${i})"><i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger" onclick="deleteCarta(${i})"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>`).join('');
-        }
-
-        async function handleCartaSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('carta-submit-btn');
-            const origHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
-            try {
-                const fileInput = document.getElementById('crt-img');
-                let imageUrl = editingCartaIndex > -1 ? (siteData.carta.drinks[editingCartaIndex].image || '') : '';
-                if (fileInput && fileInput.files[0]) imageUrl = await uploadFile(fileInput);
-
-                const item = {
-                    id: editingCartaIndex > -1 ? siteData.carta.drinks[editingCartaIndex].id : 'crt-' + Date.now(),
-                    image: imageUrl,
-                    name: document.getElementById('crt-name').value,
-                    category: document.getElementById('crt-cat').value,
-                    price: document.getElementById('crt-price').value,
-                    tablePrice: document.getElementById('crt-table').value
-                };
-
-                if (editingCartaIndex > -1) {
-                    siteData.carta.drinks[editingCartaIndex] = item;
-                    editingCartaIndex = -1;
-                } else {
-                    siteData.carta.drinks.push(item);
-                }
-
-                e.target.reset();
-                document.getElementById('carta-form-title').textContent = 'Add Drink / Bottle';
-                btn.innerHTML = '<i class="fas fa-plus"></i> <span>Add to Carta</span>';
-                renderCarta();
-                await saveData();
-            } catch (err) {
-                alert('Error: ' + err.message);
-                btn.innerHTML = origHTML;
-            }
-        }
-
-        function startEditCarta(i) {
-            editingCartaIndex = i;
-            const d = siteData.carta.drinks[i];
-            document.getElementById('crt-name').value = d.name || '';
-            document.getElementById('crt-cat').value = d.category || 'Bières';
-            document.getElementById('crt-price').value = d.price || '';
-            document.getElementById('crt-table').value = d.tablePrice || '';
-            document.getElementById('carta-form-title').textContent = 'Edit Drink';
-            const btn = document.getElementById('carta-submit-btn');
-            btn.innerHTML = '<i class="fas fa-save"></i> <span>Update Item</span>';
-            document.getElementById('panel-carta').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        async function deleteCarta(i) {
-            if (confirm('Delete this carta item?')) {
-                siteData.carta.drinks.splice(i, 1);
-                renderCarta();
-                await saveData();
-            }
-        }
-
-        // ── GALLERY / PHOTOS ──────────────────────────────────────
-        function renderPhotos() {
-            const box = document.getElementById('photos-list');
-            if (!box) return;
-            if (!siteData.photos.length) {
-                box.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No media uploaded yet.</p>';
-                return;
-            }
-            box.innerHTML = siteData.photos.map((p, i) => `
-        <div class="item-row">
-            ${p.type === 'image'
-                    ? `<img src="${p.src}" class="img-thumb-sq" alt="${p.alt || ''}">`
-                    : `<video src="${p.src}" class="img-thumb-sq" muted></video>`
-                }
-            <div class="item-info">
-                <strong>${p.alt || 'No caption'}</strong>
-                <small>${p.type || 'image'} · ${p.src}</small>
-            </div>
-            <div class="item-actions">
-                <button class="btn btn-edit" onclick="startEditPhoto(${i})"><i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger" onclick="deletePhoto(${i})"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>`).join('');
-        }
-
-        function startEditPhoto(i) {
-            const p = siteData.photos[i];
-            const newCaption = prompt('Edit caption/description:', p.alt || '');
-            if (newCaption !== null) {
-                siteData.photos[i].alt = newCaption;
-                renderPhotos();
-                saveData();
-            }
-        }
-
-        async function handlePhotoSubmit(e) {
-            e.preventDefault();
-            const fileInput = document.getElementById('p-file');
-            const alt = document.getElementById('p-alt').value;
-            if (!fileInput.files[0]) { alert('Please select a file to upload.'); return; }
-
-            const fd = new FormData();
-            fd.append('image', fileInput.files[0]);
-            const res = await fetch('/api/upload', { method: 'POST', body: fd });
-            const result = await res.json();
-            const isVideo = fileInput.files[0].type.startsWith('video');
-
-            siteData.photos.push({ id: 'p-' + Date.now(), type: isVideo ? 'video' : 'image', src: result.url, alt });
-            fileInput.value = '';
-            document.getElementById('p-alt').value = '';
-            renderPhotos();
-            await saveData();
-        }
-
-        async function deletePhoto(i) {
-            if (confirm('Delete this media item?')) {
-                siteData.photos.splice(i, 1);
-                renderPhotos();
-                await saveData();
-            }
-        }
-
-        // ── SETTINGS ──────────────────────────────────────────────
-        async function handleSettingsSubmit(e) {
-            e.preventDefault();
-            if (!siteData.settings) siteData.settings = {};
-            siteData.settings.tiktok = document.getElementById('set-tiktok').value;
-            siteData.settings.instagram = document.getElementById('set-insta').value;
-            siteData.settings.facebook = document.getElementById('set-fb').value;
-            siteData.settings.whatsapp = document.getElementById('set-wa').value;
-            siteData.settings.phone = document.getElementById('set-phone').value;
-            await saveData();
-        }
-
-        async function handleAuthSubmit(e) {
-            e.preventDefault();
-            if (!confirm('Are you sure you want to change the admin credentials? You will be logged out.')) return;
-            if (!siteData.auth) siteData.auth = {};
-            siteData.auth.username = document.getElementById('set-user').value;
-            siteData.auth.password = document.getElementById('set-pass').value;
-            await saveData();
-            alert('Credentials updated successfully! Logging you out now.');
-            logout();
-        }
-
-        // ── SAVE DATA ─────────────────────────────────────────────
-        async function saveData() {
-            const btn = document.getElementById('save-all');
-            const orig = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;SAVING...';
-            btn.disabled = true;
-
-            try {
-                const res = await fetch('/api/data', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(siteData)
-                });
-                if (!res.ok) throw new Error('Server returned ' + res.status);
-
-                const toast = document.getElementById('toast');
-                toast.textContent = '✓ Saved successfully!';
-                toast.style.opacity = '1';
-                setTimeout(() => toast.style.opacity = '0', 3000);
-            } catch (err) {
-                alert('SAVE FAILED: ' + err.message);
-            } finally {
-                btn.innerHTML = orig;
-                btn.disabled = false;
-            }
-        }
-    </script>
+        <script src="i18n.js"></script>
+    <script src="admin.js"></script>
 </body>
 
 </html>

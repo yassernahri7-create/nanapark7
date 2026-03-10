@@ -1,36 +1,26 @@
-# ─── Stage 1: Install dependencies ───
-FROM node:20-alpine AS deps
+FROM node:20-alpine AS base
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+COPY package*.json ./
 RUN npm ci --omit=dev
 
-# ─── Stage 2: Production image ───
-FROM node:20-alpine AS production
-WORKDIR /app
+COPY . .
 
-# Security: run as non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN mkdir -p /app/data /app/uploads && chown -R node:node /app
 
-# Create persistent data directories
-RUN mkdir -p /app/uploads /app/data && chown -R appuser:appgroup /app
+ENV NODE_ENV=production
+USER node
 
-# Copy dependencies from build stage
-COPY --from=deps --chown=appuser:appgroup /app/node_modules ./node_modules
+FROM base AS website-production
+ENV PORT=3001
+EXPOSE 3001
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:${PORT:-3001}/health || exit 1
+CMD ["node", "website-server.js"]
 
-# Copy application source
-COPY --chown=appuser:appgroup . .
-
-# Move data.json to persistent volume path on first run (handled by entrypoint)
-# Ensure uploads and data dirs are writable
-RUN chown -R appuser:appgroup /app/uploads /app
-
-USER appuser
-
-# Expose the port the app runs on
-EXPOSE ${PORT:-3001}
-
-# Health check using the existing /health endpoint
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT:-3001}/health || exit 1
-
-CMD ["node", "server.js"]
+FROM base AS admin-production
+ENV PORT=3101
+EXPOSE 3101
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:${PORT:-3101}/health || exit 1
+CMD ["node", "admin-server.js"]
